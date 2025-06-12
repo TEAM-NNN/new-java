@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>発注予測</title>
+</head>
+<body>
+    <h2 th:text="'発注予測（' + ${orderDate} + '）'">発注予測</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ビール名</th>
+                <th>予測本数</th>
+                <th>価格</th>
+                <th>合計金額</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${forecastList}">
+                <td th:text="${item.beerName}">IPA</td>
+                <td th:text="${item.predictedQuantity}">40</td>
+                <td th:text="${item.price}">900</td>
+                <td th:text="${item.total}">36000</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
