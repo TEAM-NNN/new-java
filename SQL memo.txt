@@ -1,3 +1,5 @@
+CREATE DATABASE beerdb;
+
 -- ユーザー情報（管理者・スタッフ）
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
