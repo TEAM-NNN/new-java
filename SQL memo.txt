@@ -3,52 +3,37 @@ CREATE DATABASE beerdb;
 -- ユーザー情報（管理者・スタッフ）
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    is_admin BOOLEAN DEFAULT FALSE
+    email VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    admin BOOLEAN DEFAULT FALSE,
+    delete BOOLEAN DEFAULT FALSE
 );
 
--- 販売実績（1日ごとの集計）
-CREATE TABLE sales_records (
-    id SERIAL PRIMARY KEY,
-    date DATE NOT NULL,
-    reservation_count INTEGER,
-    reservation_people INTEGER,
-    total_cups INTEGER,
-    total_sales INTEGER,
-    entered_by INTEGER REFERENCES users(id)
-);
-
--- 天気情報（日別）
+-- 2. weather（天気情報）テーブル
 CREATE TABLE weather (
     date DATE PRIMARY KEY,
-    temp_max NUMERIC(5,2),
-    temp_min NUMERIC(5,2),
-    weather_main VARCHAR(50),
-    humidity INTEGER
+    temp_max FLOAT,
+    temp_min FLOAT,
+    weather_main VARCHAR,
+    humidity INT,
+    wind_speed FLOAT
 );
 
--- ビール情報（6種類）
+-- 3. beers（ビール）テーブル
 CREATE TABLE beers (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    price INTEGER NOT NULL
+    name VARCHAR NOT NULL,
+    price INT NOT NULL,
+    delete BOOLEAN DEFAULT FALSE
 );
 
--- 日別・ビール別の販売本数と売上
+-- 4. beer_sales（ビール別販売明細）テーブル
 CREATE TABLE beer_sales (
-    id SERIAL PRIMARY KEY,
-    sales_record_id INTEGER REFERENCES sales_records(id) ON DELETE CASCADE,
-    beer_id INTEGER REFERENCES beers(id) ON DELETE CASCADE,
-    quantity INTEGER NOT NULL,
-    sales_amount INTEGER NOT NULL
-);
-
--- 予測結果（発注支援用）
-CREATE TABLE forecast_results (
-    id SERIAL PRIMARY KEY,
-    date DATE NOT NULL,
-    beer_id INTEGER REFERENCES beers(id) ON DELETE CASCADE,
-    predicted_quantity INTEGER NOT NULL,
-    predicted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    date DATE,
+    beer_id INT,
+    quantity INT NOT NULL,
+    enter_user_id INT,
+    PRIMARY KEY (date, beer_id),
+    FOREIGN KEY (beer_id) REFERENCES beers(id),
+    FOREIGN KEY (enter_user_id) REFERENCES users(id)
 );
