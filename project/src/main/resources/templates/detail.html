@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>日別実績詳細</title>
+</head>
+<body>
+    <h2 th:text="${date} + ' の販売詳細'"></h2>
+    <table border="1">
+        <tr>
+            <th>ビール名</th>
+            <th>販売本数</th>
+            <th>売上</th>
+        </tr>
+        <tr th:each="item : ${details}">
+            <td th:text="${item.beerName}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.totalSales} + ' 円'"></td>
+        </tr>
+    </table>
+    <br>
+    <a href="/calendar">← カレンダーに戻る</a>
+</body>
+</html>

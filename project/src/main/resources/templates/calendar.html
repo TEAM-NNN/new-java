@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>実績・天気表示</title>
+</head>
+<body>
+    <h2 th:text="${month} + ' の売上カレンダー'"></h2>
+    <a th:href="@{/calendar(month=${month.minusMonths(1)})}">← 前月</a>
+    <a th:href="@{/calendar(month=${month.plusMonths(1)})}">次月 →</a>
+    <table border="1">
+        <tr>
+            <th>日付</th>
+            <th>売上</th>
+            <th>天気</th>
+        </tr>
+        <tr th:each="day : ${calendarData}">
+            <td th:text="${day.date}"></td>
+            <td th:text="${day.totalSales} + ' 円'"></td>
+            <td th:text="${day.weather}"></td>
+        </tr>
+    </table>
+</body>
+</html>
