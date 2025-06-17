@@ -1,23 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>実績・天気表示</title>
+    <meta charset="UTF-8">
+    <title>売上・天気カレンダー</title>
+
+    <!-- ✅ 正しい FullCalendar CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/locales-all.global.min.js"></script>
+
+    <!-- CSS 自定义样式 -->
+    <style>
+        body {
+            height: 100%;
+            font-family: "メイリオ", sans-serif;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d38658;
+            margin-bottom: 40px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            min-height: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            --fc-button-bg-color: #f5b777;
+            --fc-button-border-color: #d38658;
+        }
+    </style>
 </head>
+
 <body>
-    <h2 th:text="${month} + ' の売上カレンダー'"></h2>
-    <a th:href="@{/calendar(month=${month.minusMonths(1)})}">← 前月</a>
-    <a th:href="@{/calendar(month=${month.plusMonths(1)})}">次月 →</a>
-    <table border="1">
-        <tr>
-            <th>日付</th>
-            <th>売上</th>
-            <th>天気</th>
-        </tr>
-        <tr th:each="day : ${calendarData}">
-            <td th:text="${day.date}"></td>
-            <td th:text="${day.totalSales} + ' 円'"></td>
-            <td th:text="${day.weather}"></td>
-        </tr>
-    </table>
+
+    <h1>🍺 売上・天気カレンダー</h1>
+
+    <div id="calendar"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ja',
+                initialView: 'dayGridMonth',
+                firstDay: 0,
+                height: 'auto',
+                //デートクリック
+                dateClick:function(info){
+                    const date = info.dateStr;
+                    window.location.href = '/detail?date=' + date;
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
 </body>
 </html>

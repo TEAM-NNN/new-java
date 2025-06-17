@@ -1,58 +1,48 @@
 package com.example.project.controller;
 
-import com.example.project.model.*;
+import com.example.project.model.DailyStatusDTO;
 import com.example.project.service.CalendarService;
-import com.example.project.service.DetailService;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CalendarController {
 
     private final CalendarService calendarService;
-    private final DetailService detailService;
 
-    public CalendarController(CalendarService calendarService, DetailService detailService) {
+    public CalendarController(CalendarService calendarService) {
         this.calendarService = calendarService;
-        this.detailService = detailService;
     }
 
-    /**
-     * 📅 カレンダー画面
-     * URL: /calendar?year=2025&month=6
-     */
+    // FullCalendar 页面
     @GetMapping("/calendar")
-    public String showCalendar(@RequestParam(required = false) Integer year,
-                               @RequestParam(required = false) Integer month,
-                               Model model) {
-        LocalDate today = LocalDate.now();
-        int y = (year != null) ? year : today.getYear();
-        int m = (month != null) ? month : today.getMonthValue();
-
-        List<DailyStatusDTO> statusList = calendarService.getMonthlyStatus(y, m);
-
-        model.addAttribute("statusList", statusList);
-        model.addAttribute("year", y);
-        model.addAttribute("month", m);
+    public String showCalendarPage() {
         return "calendar";
     }
 
-    /**
-     * 📄 明細画面
-     * URL: /detail?date=2025-06-17
-     */
-    @GetMapping("/detail")
-    public String showDetail(@RequestParam("date") String dateStr, Model model) {
-        LocalDate date = LocalDate.parse(dateStr);
-        List<BeerSalesDetailDTO> details = detailService.getDetailsByDate(date);
+    // FullCalendar JSON 数据
+    @GetMapping("/api/calendar-events")
+    @ResponseBody
+    public List<Map<String, Object>> getCalendarEvents() {
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
 
-        model.addAttribute("date", date);
-        model.addAttribute("details", details);
-        return "detail";
+        List<DailyStatusDTO> list = calendarService.getMonthlyStatus(year, month);
+
+        List<Map<String, Object>> events = new ArrayList<>();
+        for (DailyStatusDTO dto : list) {
+            Map<String, Object> event = new HashMap<>();
+            event.put("title", dto.getTotalSales() + "円 (" + dto.getWeatherMain() + ")");
+            event.put("start", dto.getDate().toString());
+            event.put("allDay", true);
+            events.add(event);
+        }
+
+        return events;
     }
 }
