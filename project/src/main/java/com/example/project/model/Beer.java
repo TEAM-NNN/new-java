@@ -12,10 +12,10 @@ public class Beer {
 
     private String name;
 
-    @Column(name = "pricecurrent")
-    private int priceCurrent;
+    @Column(name = "price")
+    private int price;
 
-    private boolean deleted;
+    private boolean delete;
 
     // ===== Getter & Setter =====
 
@@ -35,19 +35,12 @@ public class Beer {
         this.name = name;
     }
 
-    public int getPriceCurrent() {
-        return priceCurrent;
+    public int getPrice() {
+        return price;
     }
 
-    public void setPriceCurrent(int priceCurrent) {
-        this.priceCurrent = priceCurrent;
+    public void setPrice(int price) {
+        this.price = price;
     }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
+    
 }

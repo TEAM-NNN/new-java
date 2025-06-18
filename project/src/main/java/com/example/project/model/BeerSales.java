@@ -18,7 +18,6 @@ public class BeerSales {
 
     private int quantity;
 
-    private int enter;
 
     @Column(name = "user_id")
     private Long userId;
@@ -56,15 +55,7 @@ public class BeerSales {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    public int getEnter() {
-        return enter;
-    }
-
-    public void setEnter(int enter) {
-        this.enter = enter;
-    }
-
+    
     public Long getUserId() {
         return userId;
     }

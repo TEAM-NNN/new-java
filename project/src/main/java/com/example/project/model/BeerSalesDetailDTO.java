@@ -4,36 +4,33 @@ package com.example.project.model;
 
 public class BeerSalesDetailDTO {
 
-    private String beerName;
-    private int quantity;
-    private int totalSales;
+    private String beerName;     // ビール名
+    private int quantity;        // 販売本数
+    private int totalSales;      // 売上金額
+    private String janCode;      // JANコード
 
-    public BeerSalesDetailDTO(String beerName, int quantity, int totalSales){
-
+    // 全項目を受け取るコンストラクタ
+    public BeerSalesDetailDTO(String beerName, int quantity, int totalSales, String janCode) {
         this.beerName = beerName;
         this.quantity = quantity;
         this.totalSales = totalSales;
-
+        this.janCode = janCode;
     }
 
-    public String getBeerName(){
-
+    // Getter
+    public String getBeerName() {
         return beerName;
-
     }
 
-    public int getQuantity(){
-
+    public int getQuantity() {
         return quantity;
-
     }
 
-    public int getTotalSales(){
-
+    public int getTotalSales() {
         return totalSales;
-
     }
 
-
-    
+    public String getJanCode() {
+        return janCode;
+    }
 }

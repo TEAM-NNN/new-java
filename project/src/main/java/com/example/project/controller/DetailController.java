@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Controller
 public class DetailController {
@@ -19,13 +20,20 @@ public class DetailController {
         this.detailService = detailService;
     }
 
-    // 明细页面
+    // 詳細表示画面
     @GetMapping("/detail")
-    public String showDetail(@RequestParam("date") String dateStr, Model model) {
-        LocalDate date = LocalDate.parse(dateStr);
+    public String showDetail(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                             Model model) {
+
         List<BeerSalesDetailDTO> details = detailService.getDetailsByDate(date);
+        int totalAmount = details.stream()
+                .mapToInt(BeerSalesDetailDTO::getTotalSales)
+                .sum();
+
         model.addAttribute("date", date);
         model.addAttribute("details", details);
+        model.addAttribute("totalAmount", totalAmount);  // ← 合計金額をビューに渡す
+
         return "detail";
     }
 }

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>売上・天気カレンダー</title>
 
-    <!-- ✅ 正しい FullCalendar CDN -->
+    <!-- ✅ FullCalendar CDN -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/locales-all.global.min.js"></script>
 
-    <!-- CSS 自定义样式 -->
+    <!-- ✅ 自定义样式 -->
     <style>
         body {
             height: 100%;
@@ -35,10 +34,11 @@
             box-shadow: 0 0 8px rgba(0,0,0,0.1);
             --fc-button-bg-color: #f5b777;
             --fc-button-border-color: #d38658;
+            --fc-button-hover-bg-color: #c0644c;
+            --fc-button-active-bg-color: #c0644c;
         }
     </style>
 </head>
-
 <body>
 
     <h1>🍺 売上・天気カレンダー</h1>
@@ -54,20 +54,29 @@
                 initialView: 'dayGridMonth',
                 firstDay: 0,
                 height: 'auto',
-                //デートクリック
-                dateClick:function(info){
-                    const date = info.dateStr;
-                    window.location.href = '/detail?date=' + date;
-                },
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
                     right: ''
+                },
+                // ✅ 向后端发起 events 请求
+                events: {
+                    url: '/api/calendar-events',
+                    method: 'GET',
+                    failure: function() {
+                        console.error("データ取得エラー");
+                    }
+                },
+                // ✅ 点击日期跳转到明细页
+                dateClick: function(info) {
+                    const date = info.dateStr;
+                    window.location.href = '/detail?date=' + date;
                 }
             });
 
             calendar.render();
         });
     </script>
+
 </body>
 </html>

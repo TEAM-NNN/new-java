@@ -22,16 +22,33 @@ public class DetailService {
     public List<BeerSalesDetailDTO> getDetailsByDate(LocalDate date) {
         List<BeerSales> salesList = beerSalesRepository.findByDate(date);
 
-        // 取得所有啤酒名称，用 map 快速查找
-        Map<Long, String> beerNameMap = beerRepository.findAll().stream()
-                .collect(Collectors.toMap(Beer::getId, Beer::getName));
+        // ビールID → Beer オブジェクト
+        Map<Long, Beer> beerMap = beerRepository.findAll().stream()
+                .collect(Collectors.toMap(Beer::getId, beer -> beer));
+
+        // ビール名 → JANコード
+        Map<String, String> janMap = Map.of(
+            "ホワイトビール", "4901234567894",
+            "ラガー", "4512345678907",
+            "ペールエール", "4987654321097",
+            "フルーツビール", "4545678901234",
+            "黒ビール", "4999999999996",
+            "IPA", "4571234567892"
+        );
 
         List<BeerSalesDetailDTO> details = new ArrayList<>();
+
         for (BeerSales sale : salesList) {
-            String beerName = beerNameMap.getOrDefault(sale.getBeerId(), "不明");
-            int quantity = sale.getQuantity();
-            int amount = quantity * sale.getEnter();
-            details.add(new BeerSalesDetailDTO(beerName, quantity, amount));
+            Beer beer = beerMap.get(sale.getBeerId());
+            if (beer != null) {
+                String name = beer.getName();
+                int quantity = sale.getQuantity();
+                int price = beer.getPrice();
+                int total = quantity * price;
+                String jan = janMap.getOrDefault(name, "不明");
+
+                details.add(new BeerSalesDetailDTO(name, quantity, total, jan));
+            }
         }
 
         return details;
