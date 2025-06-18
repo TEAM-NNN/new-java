@@ -35,18 +35,17 @@ public class CalendarService {
     }
 
     /**
-     * 🔹 任意の期間の売上・天気情報を取得（FullCalendar 拡張用）
+     * 🔹 任意の期間の売上・天気情報を取得（カレンダー表示用）
      */
     public List<DailyStatusDTO> getStatusBetween(LocalDate start, LocalDate end) {
 
-        // 🟡 ビール情報の取得（Map: beerId → Beer）
+        // 🟡 ビール情報取得（id → Beer）
         Map<Long, Beer> beerMap = beerRepository.findAll().stream()
                 .collect(Collectors.toMap(Beer::getId, beer -> beer));
 
-        // 🟡 売上データの取得
+        // 🟡 売上取得（合計金額を日付ごとに集計）
         List<BeerSales> salesList = beerSalesRepository.findByDateBetween(start, end);
         Map<LocalDate, Integer> totalSalesMap = new HashMap<>();
-
         for (BeerSales sale : salesList) {
             LocalDate date = sale.getDate();
             int quantity = sale.getQuantity();
@@ -59,19 +58,36 @@ public class CalendarService {
             }
         }
 
-        // 🟡 天気データの取得（Map: date → weather）
+        // 🟡 天気取得（null安全に）
         List<Weather> weatherList = weatherRepository.findByDateBetween(start, end);
         Map<LocalDate, String> weatherMap = weatherList.stream()
+                .filter(w -> w.getDate() != null && w.getWeatherMain() != null)
                 .collect(Collectors.toMap(Weather::getDate, Weather::getWeatherMain));
 
-        // 🟡 DTO の生成（全日付に対して）
+        // 🟡 日別 DTO 作成
         List<DailyStatusDTO> result = new ArrayList<>();
         for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
             int totalSales = totalSalesMap.getOrDefault(d, 0);
-            String weather = weatherMap.getOrDefault(d, "不明");
-            result.add(new DailyStatusDTO(d, totalSales, weather));
+            String weatherMain = weatherMap.getOrDefault(d, "不明");
+            String weatherIcon = getWeatherIcon(weatherMain);
+            result.add(new DailyStatusDTO(d, totalSales, weatherIcon));
         }
 
         return result;
+    }
+
+    /**
+     * 🔸 天気種類をアイコンに変換（不明も対応）
+     */
+    private String getWeatherIcon(String weatherMain) {
+        return switch (weatherMain) {
+            case "晴" -> "☀️";
+            case "曇" -> "☁️";
+            case "雨" -> "🌧️";
+            case "雪" -> "❄️";
+            case "雷" -> "⛈️";
+            case "大雨" -> "🌧️🌧️";
+            default -> "❓";
+        };
     }
 }

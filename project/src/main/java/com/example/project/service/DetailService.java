@@ -17,6 +17,7 @@ public class DetailService {
     public DetailService(BeerSalesRepository beerSalesRepository, BeerRepository beerRepository) {
         this.beerSalesRepository = beerSalesRepository;
         this.beerRepository = beerRepository;
+
     }
 
     public List<BeerSalesDetailDTO> getDetailsByDate(LocalDate date) {

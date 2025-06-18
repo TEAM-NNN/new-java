@@ -3,80 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>売上・天気カレンダー</title>
-
-    <!-- ✅ FullCalendar CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/locales-all.global.min.js"></script>
-
-    <!-- ✅ 自定义样式 -->
     <style>
         body {
-            height: 100%;
             font-family: "メイリオ", sans-serif;
             padding: 30px;
             background-color: #ffffff;
         }
 
-        h1 {
-            text-align: center;
+        .calendar-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .month-title {
+            font-size: 28px;
+            font-weight: bold;
             color: #d38658;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons a {
+            margin: 0 10px;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #f5b777;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        table.calendar {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 40px;
         }
 
-        #calendar {
-            max-width: 900px;
-            min-height: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-            --fc-button-bg-color: #f5b777;
-            --fc-button-border-color: #d38658;
-            --fc-button-hover-bg-color: #c0644c;
-            --fc-button-active-bg-color: #c0644c;
+        .calendar th, .calendar td {
+            border: 1px solid #ddd;
+            width: 14.28%;
+            height: 100px;
+            vertical-align: top;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .calendar th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .day-cell {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .weather {
+            font-size: 20px;
+        }
+
+        .sales {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .detail-button {
+            margin-top: auto;
+            text-align: right;
+        }
+
+        .detail-button a {
+            font-size: 12px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #c0644c;
+            padding: 2px 6px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-    <h1>🍺 売上・天気カレンダー</h1>
+<div class="calendar-container">
+    <div class="nav-buttons">
+        <a th:href="@{/calendar(year=${prevYear}, month=${prevMonth})}">◀ 前月</a>
+        <a th:href="@{/calendar}">今日</a>
+        <a th:href="@{/calendar(year=${nextYear}, month=${nextMonth})}">次月 ▶</a>
+    </div>
 
-    <div id="calendar"></div>
+    <div class="month-title" th:text="${year} + '年 ' + ${month} + '月'"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const calendarEl = document.getElementById('calendar');
+    <table class="calendar">
+        <thead>
+        <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+        </tr>
+        </thead>
+       <tbody>
+        <tr th:each="week : ${#numbers.sequence(0, ((days.size() + startDayOfWeek + 6) / 7) - 1)}">
+            <td th:each="dayIndex : ${#numbers.sequence(0,6)}"
+            th:with="i=${week * 7 + dayIndex}">
+            
+            <!-- 空白セル（前月分） -->
+             <div th:if="${i < startDayOfWeek}"></div>
+             
+             <!-- 有効日付セル -->
+              <div th:if="${i >= startDayOfWeek && i - startDayOfWeek < days.size()}"
+                th:with="day=${days[i - startDayOfWeek]}"
+                class="day-cell">
 
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'ja',
-                initialView: 'dayGridMonth',
-                firstDay: 0,
-                height: 'auto',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: ''
-                },
-                // ✅ 向后端发起 events 请求
-                events: {
-                    url: '/api/calendar-events',
-                    method: 'GET',
-                    failure: function() {
-                        console.error("データ取得エラー");
-                    }
-                },
-                // ✅ 点击日期跳转到明细页
-                dateClick: function(info) {
-                    const date = info.dateStr;
-                    window.location.href = '/detail?date=' + date;
-                }
-            });
-
-            calendar.render();
-        });
-    </script>
+                <div class="day-number" th:text="${day.date.dayOfMonth}"></div>
+                <div class="weather" th:text="${day.weather}"></div>
+                <div class="sales" th:text="${#numbers.formatInteger(day.totalSales, 1, 'COMMA')} + '円'"></div>
+                <div class="detail-button">
+                    <a th:href="@{'/detail?date=' + ${day.date}}">詳細</a>
+                </div>
+            </div>
+            
+            <!-- 空白セル（翌月分） -->
+             <div th:if="${i - startDayOfWeek >= days.size()}"></div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 
 </body>
 </html>

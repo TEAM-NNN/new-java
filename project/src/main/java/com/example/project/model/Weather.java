@@ -13,7 +13,7 @@ public class Weather {
 
     private LocalDate date;
 
-    @Column(name = "weathermain")
+    @Column(name = "weather_main")
     private String weatherMain;
 
     // === Getter & Setter ===

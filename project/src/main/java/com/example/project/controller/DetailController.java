@@ -20,7 +20,6 @@ public class DetailController {
         this.detailService = detailService;
     }
 
-    // 詳細表示画面
     @GetMapping("/detail")
     public String showDetail(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                              Model model) {
