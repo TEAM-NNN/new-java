@@ -26,13 +26,7 @@ public class InputController {
           LocalDate today = LocalDate.now();
 
              boolean alreadySaved = beerSaleRepository.existsByDate(today);
-   /*  model.addAttribute("alreadySaved", alreadySaved); 
-
-    if (beerSaleRepository.existsByDate(today)) {
-        model.addAttribute("message", "本日の販売実績はすでに入力済みです。");
-        model.addAttribute("today", today);
-        return "input-form"; 
-    } */
+  
         List<BeerItem> beerList = Arrays.asList(
                 new BeerItem(1, "ホワイトビール", 900, "4901234567894"),
                 new BeerItem(2, "ラガー", 800, "4512345678907"),
