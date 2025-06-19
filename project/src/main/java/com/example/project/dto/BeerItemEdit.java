@@ -1,6 +1,6 @@
 package com.example.project.dto;
 
-public class BeerItem {
+public class BeerItemEdit {
     private int no;
     private String name;
     private int price;
@@ -8,11 +8,11 @@ public class BeerItem {
     private Integer soldCount;
 
     // ★ デフォルトコンストラクタ（これが必要）
-    public BeerItem() {
+    public BeerItemEdit() {
     }
 
     // ★ 引数ありコンストラクタ（1つだけ）
-    public BeerItem(int no, String name, int price, String jan) {
+    public BeerItemEdit(int no, String name, int price, String jan) {
         this.no = no;
         this.name = name;
         this.price = price;
