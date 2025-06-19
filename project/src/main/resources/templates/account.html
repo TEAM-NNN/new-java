@@ -10,7 +10,9 @@
     <h1>アカウント管理画面</h1>
 
     <div class="header-actions">
-        <button type="button" class="btn">アカウント作成</button>
+        <a href="/accounts/new">
+            <button type="button" class="btn">アカウント作成</button>
+        </a>
     </div>
 
     <table>
@@ -27,7 +29,11 @@
                 <td th:text="${user.name}">田中太郎</td>
                 <td th:text="${user.email}">sam@sa.com</td>
                 <td th:text="${user.admin} ? '管理者' : '一般'">管理者</td>
-                <td><button type="button" class="btn btn-manage">管理</button></td>
+                <td>
+                    <a th:href="@{'/accounts/edit/' + ${user.id}}">
+                        <button type="button">管理</button>
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
