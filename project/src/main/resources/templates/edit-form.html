@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>実績修正画面</title>
+</head>
+<body>
+    <h2>実績修正画面</h2>
+<p>日付：<span th:text="${today}"></span></p>
+
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>銘柄</th>
+        <th>値段</th>
+        <th>JANコード</th>
+        <th>販売本数</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="sale : ${salesList}">
+        <form th:action="@{/edit/update}" method="post">
+            <td th:text="${sale.beerId}"></td>
+            <td th:text="${sale.beer.name}"></td>
+            <td th:text="${sale.beer.price}"></td>
+            <td th:text="${sale.beer.jan}"></td>
+            <td>
+                <input type="hidden" name="id" th:value="${sale.id}" />
+                <input type="number" name="quantity" th:value="${sale.quantity}" min="0" />
+            </td>
+            <td><button type="submit">修正</button></td>
+        </form>
+    </tr>
+</table>
+
+<p th:if="${message}" th:text="${message}" style="color:green;"></p>
+
+</body>
+</html>
