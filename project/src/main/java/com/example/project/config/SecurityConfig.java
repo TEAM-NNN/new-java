@@ -21,8 +21,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login","/reset-password", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login","/reset-password", "/css/**", "/js/**").permitAll()   // ログインページとパスワードリセットページ、静的リソースを許可
                 .requestMatchers("/change-password").permitAll() // パスワードリセットページを許可
+                .requestMatchers("/edit", "/accounts").hasRole("ADMIN") // 管理者ページは管理者のみアクセス可能
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
