@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>実績詳細画面</title>
+    <style>
+        body {
+            font-family: "メイリオ", sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .sub {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">実績詳細画面</div>
+    <div class="sub">日付：<span th:text="${date}"></span></div>
+
+    <table>
+        <thead>
+    <tr>
+        <th>ビール名</th>
+        <th>JANコード</th> <!-- 追加 -->
+        <th>販売本数</th>
+        <th>売上</th>
+    </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${details}">
+        <td th:text="${item.beerName}"></td>
+        <td th:text="${item.janCode}"></td> <!-- 追加 -->
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${#numbers.formatInteger(item.totalSales, 3, 'COMMA')} + ' 円'"></td>
+    </tr>
+        <tr class="total-row">
+        <td colspan="3">合計売上:</td>
+        <td th:text="${#numbers.formatInteger(totalAmount, 3, 'COMMA')} + ' 円'"></td>
+    </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
