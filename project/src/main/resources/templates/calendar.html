@@ -3,94 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>売上・天気カレンダー</title>
-    <style>
-        body {
-            font-family: "メイリオ", sans-serif;
-            padding: 30px;
-            background-color: #ffffff;
-        }
 
-        .calendar-container {
-            max-width: 1000px;
-            margin: auto;
-        }
+    <link rel="stylesheet" href="/css/calendar.css">
 
-        .month-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #d38658;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .nav-buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .nav-buttons a {
-            margin: 0 10px;
-            text-decoration: none;
-            padding: 8px 16px;
-            background-color: #f5b777;
-            color: #fff;
-            border-radius: 8px;
-        }
-
-        table.calendar {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-        }
-
-        .calendar th, .calendar td {
-            border: 1px solid #ddd;
-            width: 14.28%;
-            height: 100px;
-            vertical-align: top;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        .calendar th {
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-
-        .day-cell {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .day-number {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .weather {
-            font-size: 20px;
-        }
-
-        .sales {
-            font-size: 13px;
-            color: #555;
-        }
-
-        .detail-button {
-            margin-top: auto;
-            text-align: right;
-        }
-
-        .detail-button a {
-            font-size: 12px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #c0644c;
-            padding: 2px 6px;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
 
@@ -106,13 +21,13 @@
     <table class="calendar">
         <thead>
         <tr>
-            <th>日</th>
+            <th class="sunday">日</th>
             <th>月</th>
             <th>火</th>
             <th>水</th>
             <th>木</th>
             <th>金</th>
-            <th>土</th>
+            <th class="saturday">土</th>
         </tr>
         </thead>
        <tbody>
