@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント作成</title>
+    <link rel="stylesheet" th:href="@{/css/account.css}">
+</head>
+<body>
+<h1>アカウント作成</h1>
+<form th:action="@{/accounts/create}" method="post" th:object="${account}">
+    <label>名前: <input type="text" th:field="*{name}" /></label><br>
+    <label>メール: <input type="email" th:field="*{email}" /></label><br>
+    <label>パスワード: <input type="password" th:field="*{password}" /></label><br>
+    <label>権限:
+        <select th:field="*{admin}">
+            <option th:value="true">管理者</option>
+            <option th:value="false">一般</option>
+        </select>
+    </label><br>
+    <button type="submit" class="btn">作成</button>
+</form>
+</body>
+</html>
