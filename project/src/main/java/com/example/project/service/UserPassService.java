@@ -16,7 +16,7 @@ public class UserPassService {
     }
 
     public boolean changePassword(String email, String currentPassword, String newPassword) {
-       return userRepository.findByEmail(email).map(user -> {
+       return userRepository.findByEmailAndDeleteFalse(email).map(user -> {
             // 現在のパスワードが正しいか確認
             if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
                 return false; // 現在のパスワードが間違っている場合はfalseを返す

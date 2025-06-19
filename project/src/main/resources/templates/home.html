@@ -7,6 +7,30 @@
 <body>
     <h1>H&C BAR</h1>
 
+    <form th:action="@{/input}" method="get">
+        <button type="submit">実績入力</button>
+    </form>
+
+    <form th:action="@{/calendar}" method="get">
+        <button type="submit">実績/天気表示</button>
+    </form>
+
+    <form th:action="@{/forecast}" method="get">
+        <button type="submit">需要予測</button>
+    </form>
+
+    <!-- 管理者のみ表示 -->
+    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <form th:action="@{/accounts}" method="get">
+        <button type="submit">アカウント管理</button>
+    </form>
+
+    <form th:action="@{/edit}" method="get">
+        <button type="submit">実績修正</button>
+    </form>
+    </div>
+
+    <!-- ログアウトフォーム -->
     <form th:action="@{/logout}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit">ログアウト</button>
