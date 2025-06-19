@@ -1,46 +1,46 @@
-package com.example.project.model;
+// package com.example.project.model;
 
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 
-@Entity
-@Table(name = "beers")
-public class Beer {
+// @Entity
+// @Table(name = "beers")
+// public class Beer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    private String name;
+//     private String name;
 
-    @Column(name = "price")
-    private int price;
+//     @Column(name = "price")
+//     private int price;
 
-    private boolean delete;
+//     private boolean delete;
 
-    // ===== Getter & Setter =====
+//     // ===== Getter & Setter =====
 
-    public Long getId() {
-        return id;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
 
-    public String getName() {
-        return name;
-    }
+//     public String getName() {
+//         return name;
+//     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//     public void setName(String name) {
+//         this.name = name;
+//     }
 
-    public int getPrice() {
-        return price;
-    }
+//     public int getPrice() {
+//         return price;
+//     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+//     public void setPrice(int price) {
+//         this.price = price;
+//     }
     
-}
+// }

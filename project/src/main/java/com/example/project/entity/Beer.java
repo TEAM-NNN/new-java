@@ -18,5 +18,11 @@ public class Beer {
     public Integer getPrice(){
         return price;
     }
-}
 
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public void seId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setPrice(Integer price) { this.price = price; }
+
+    }
