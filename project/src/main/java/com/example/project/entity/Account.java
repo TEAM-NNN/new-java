@@ -13,10 +13,15 @@ public class Account {
     private String name;
     private String email;
     private String admin;
+    private String password; 
 
     // Getter・Setter
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+    this.id = id;
     }
 
     public String getName() {
@@ -41,5 +46,13 @@ public class Account {
 
     public void setAdmin(String admin) {
         this.admin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

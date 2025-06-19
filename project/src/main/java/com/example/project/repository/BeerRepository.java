@@ -1,12 +1,9 @@
 package com.example.project.repository;
 
-import com.example.project.model.Beer;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.example.project.entity.Beer;
 
-@Repository
 public interface BeerRepository extends JpaRepository<Beer, Long> {
-
-    Beer findByName(String name);
-    
+    Optional<Beer> findByName(String name);
 }
