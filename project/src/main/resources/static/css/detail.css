@@ -1,0 +1,67 @@
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f8ff; /* アリスブルー背景 */
+    padding: 20px;
+}
+
+/* タイトル */
+h2 {
+    color: #0077b6;
+}
+
+/* 表全体 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border: 1px solid #90e0ef;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.1);
+}
+
+/* ヘッダー行 */
+th {
+    background-color: #00b4d8;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* データ行 */
+td {
+    padding: 10px;
+    border: 1px solid #caf0f8;
+    text-align: center;
+}
+
+/* 入力フィールド */
+input[type="number"] {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #90e0ef;
+    border-radius: 4px;
+}
+
+/* 保存ボタン */
+button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0096c7;
+}
+
+/* 入力済メッセージ */
+.message {
+    color: gray;
+    margin-top: 10px;
+}
+
