@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>保存結果</title>
+</head>
+<body>
+<h2 th:text="${message}"></h2>
+<p>日付：<span th:text="${today}"></span></p>
+
+<h3>入力された販売実績</h3>
+<table border="1">
+    <tr>
+        <th>No</th><th>銘柄</th><th>販売本数</th>
+    </tr>
+    <tr th:each="beer : ${form.beerList}">
+        <td th:text="${beer.no}"></td>
+        <td th:text="${beer.name}"></td>
+        <td th:text="${beer.soldCount}"></td>
+    </tr>
+</table>
+</body>
+</html>

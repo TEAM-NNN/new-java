@@ -6,15 +6,20 @@ import lombok.Data;
 public class ForecastItem {
     private String beerName;
     private Integer price;
-    private Integer predictedQuantity;
+    private Integer quantity;
 
      public ForecastItem(String beerName, Integer price, Integer predictedQuantity) {
         this.beerName = beerName;
         this.price = price;
-        this.predictedQuantity = predictedQuantity;
+        this.quantity = predictedQuantity;
     }
 
     public int getTotal() {
-        return price * predictedQuantity;
+    if (price == null || quantity == null) {
+        return 0;
     }
+    return price * quantity;
+    }
+
+
 }

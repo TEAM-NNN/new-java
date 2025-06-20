@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>実績入力</title>
+   <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+</head>
+<body>
+<h2>実績入力画面</h2>
+<p>当日日付：<span th:text="${today}"></span></p>
+
+<form th:action="@{/input/save}" method="post" th:object="${form}">
+    <table border="1">
+        <tr>
+            <th>No</th><th>銘柄</th><th>値段</th><th>JANコード</th><th>販売本数</th>
+        </tr>
+        <tr th:each="beer, stat : *{beerList}">
+
+            <td th:text="${beer.no}"></td>
+            <td th:text="${beer.name}"></td>
+            <td th:text="${beer.price}"></td>
+            <td th:text="${beer.jan}"></td>
+            <td>
+                <input type="hidden" th:field="*{beerList[__${stat.index}__].no}" />
+<input type="number" th:field="*{beerList[__${stat.index}__].soldCount}" min="0" />
+
+
+            </td>
+        </tr>
+    </table>
+
+<!-- まだ保存していない場合のみボタンを表示 -->
+<div th:if="${!alreadySaved}">
+  <button type="submit">保存</button>
+</div>
+
+<!-- すでに保存済みのメッセージ表示 -->
+<div th:if="${alreadySaved}" style="color: gray; margin-bottom: 10px;">
+  本日の販売実績はすでに入力済みです。
+</div>
+
+
+    
+</form>
+
+
