@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>実績修正画面</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/edit.css">
 </head>
 <body>
     <h2>実績修正画面</h2>
@@ -35,6 +35,12 @@
             </form>
         </tr>
     </table>
+
+    <div class="return-home">
+        <form th:action="@{ / }" method="get">
+            <button type="submit">ホーム</button>
+        </form>
+    </div>
 
     <p th:text="${message}" style="color: green; margin-top: 10px;"></p>
 </body>
