@@ -3,47 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>実績詳細画面</title>
-    <style>
-        body {
-            font-family: "メイリオ", sans-serif;
-            margin: 30px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #333;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .sub {
-            font-size: 18px;
-            margin-top: 10px;
-        }
-    </style>
+
+    <link rel="stylesheet" href="/css/detail.css">
+
 </head>
 <body>
+    <a th:href="@{/calendar}"
+        class="calendar-back-button">カレンダーに戻る</a>
 
-    <div class="title">実績詳細画面</div>
-    <div class="sub">日付：<span th:text="${date}"></span></div>
+    <h2>実績詳細画面</h2>
+    <p th:text="${date} + '     売上詳細'">販売詳細</p>
 
     <table>
         <thead>
-    <tr>
-        <th>ビール名</th>
-        <th>JANコード</th> <!-- 追加 -->
-        <th>販売本数</th>
-        <th>売上</th>
-    </tr>
+        <tr>
+            <th>銘柄</th>
+            <th>JANコード</th>
+            <th>販売本数</th>
+            <th>売上</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${details}">

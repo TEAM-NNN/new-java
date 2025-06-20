@@ -95,3 +95,30 @@
         .saturday{
             color: blue;
         }
+        
+        .beer-back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(to bottom, #fce38a, #f38181);
+            color: #5a3e1b;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 999px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            font-family: "メイリオ", sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .beer-back-button:hover {
+                background: linear-gradient(to bottom, #fcd56a, #f06969);
+                transform: scale(1.05);
+                box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
+        }

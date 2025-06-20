@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>売上・天気カレンダー</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>売上・天気カレンダー</title>
 
-    <link rel="stylesheet" href="/css/calendar.css">
+        <link rel="stylesheet" href="/css/calendar.css">
 
-</head>
+    </head>
 <body>
+    <a th:href="@{ / }" class="beer-back-button">🍺 ホームに戻る</a>
 
-<div class="calendar-container">
+    <div class="calendar-container">
     <div class="nav-buttons">
         <a th:href="@{/calendar(year=${prevYear}, month=${prevMonth})}">◀ 前月</a>
         <a th:href="@{/calendar}">今日</a>
