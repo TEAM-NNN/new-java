@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ホーム</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
     <h1>H&C BAR</h1>
@@ -29,7 +29,9 @@
             <form th:action="@{/accounts}" method="get">
                 <button type="submit">アカウント管理</button>
             </form>
+        </div>
 
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <form th:action="@{/edit}" method="get">
                 <button type="submit">実績修正</button>
             </form>
