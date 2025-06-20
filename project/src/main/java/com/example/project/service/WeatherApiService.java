@@ -4,6 +4,7 @@ import com.example.project.dto.WeatherDto;
 import com.example.project.model.Weather;
 import com.example.project.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,7 @@ public class WeatherApiService {
     @Autowired
     private WeatherRepository weatherRepository;
 
+    @Async
     public void fetchAndSaveWeatherForecast() {
         String url = "https://predapi.azurewebsites.net/api/forecast";
 
