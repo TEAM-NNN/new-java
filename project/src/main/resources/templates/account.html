@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アカウント管理</title>
+    <link rel="stylesheet" th:href="@{/css/account.css}">
+</head>
+<body>
+    <h1>アカウント管理画面</h1>
+
+    <div class="header-actions">
+        <a href="/accounts/new">
+            <button type="button" class="btn">アカウント作成</button>
+        </a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>メールアドレス</th>
+                <th>権限</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.name}">田中太郎</td>
+                <td th:text="${user.email}">sam@sa.com</td>
+                <td th:text="${user.admin} ? '管理者' : '一般'">管理者</td>
+                <td>
+                    <a th:href="@{'/accounts/edit/' + ${user.id}}">
+                        <button type="button">管理</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
