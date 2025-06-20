@@ -12,7 +12,7 @@ public class Account {
 
     private String name;
     private String email;
-    private String admin;
+    private Boolean admin;
     private String password; 
 
     // Getter・Setter
@@ -40,11 +40,11 @@ public class Account {
         this.email = email;
     }
 
-    public String getAdmin() {
+    public Boolean getAdmin() {
         return admin;
     }
 
-    public void setAdmin(String admin) {
+    public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
 

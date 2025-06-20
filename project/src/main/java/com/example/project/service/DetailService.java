@@ -1,7 +1,7 @@
 package com.example.project.service;
 
 import com.example.project.entity.Beer;
-import com.example.project.model.BeerSales;
+import com.example.project.entity.BeerSaleEdit;
 import com.example.project.model.BeerSalesDetailDTO;
 import com.example.project.repository.BeerRepository;
 import com.example.project.repository.BeerSalesRepository;
@@ -24,7 +24,7 @@ public class DetailService {
     }
 
     public List<BeerSalesDetailDTO> getDetailsByDate(LocalDate date) {
-        List<BeerSales> salesList = beerSalesRepository.findByDate(date);
+        List<BeerSaleEdit> salesList = beerSalesRepository.findByDate(date);
 
         // ビールID → Beer オブジェクト
         Map<Long, Beer> beerMap = beerRepository.findAll().stream()
@@ -47,7 +47,7 @@ public class DetailService {
 
         List<BeerSalesDetailDTO> details = new ArrayList<>();
 
-        for (BeerSales sale : salesList) {
+        for (BeerSaleEdit sale : salesList) {
             Beer beer = beerMap.get(sale.getBeerId());
             if (beer != null) {
                 String name = beer.getName();

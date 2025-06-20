@@ -2,7 +2,7 @@ package com.example.project.controller;
 
 import com.example.project.dto.BeerItem;
 import com.example.project.dto.BeerForm;
-import com.example.project.entity.BeerSale;
+import com.example.project.entity.BeerSaleEdit;
 import com.example.project.repository.BeerSaleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,11 +67,11 @@ public class InputController {
         for (BeerItem item : form.getBeerList()) {
 System.out.println("Saving beer_id = " + item.getNo()); // ← 追加！
 
-            BeerSale sale = new BeerSale();
+            BeerSaleEdit sale = new BeerSaleEdit();
             sale.setDate(today);
-            sale.setBeerId(item.getNo());              // BeerItemのnoをIDとして使う前提
+            sale.setBeerId((long) item.getNo());
             sale.setQuantity(item.getSoldCount());
-            sale.setEnterUserId(1);                    // 仮にユーザーIDを固定
+            sale.setUserId(1L);                    // 仮にユーザーIDを固定
 
             beerSaleRepository.save(sale);
         }

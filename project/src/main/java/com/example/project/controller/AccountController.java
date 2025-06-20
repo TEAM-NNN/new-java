@@ -53,7 +53,7 @@ public class AccountController {
     }
 
     @PostMapping("/accounts/update")
-public String updateAccount(@ModelAttribute Account account) {
+    public String updateAccount(@ModelAttribute Account account) {
     Account existing = accountRepository.findById(account.getId())
         .orElseThrow(() -> new IllegalArgumentException("更新対象のアカウントが見つかりません: " + account.getId()));
 

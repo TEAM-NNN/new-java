@@ -2,7 +2,7 @@ package com.example.project.service;
 
 import com.example.project.model.DailyStatusDTO;
 import com.example.project.entity.Beer;
-import com.example.project.model.BeerSales;
+import com.example.project.entity.BeerSaleEdit;
 import com.example.project.model.Weather;
 import com.example.project.repository.BeerRepository;
 import com.example.project.repository.BeerSalesRepository;
@@ -55,9 +55,9 @@ public class CalendarService {
                 ));
 
         // 🟡 売上記録を取得して日別の合計を計算
-        List<BeerSales> salesList = beerSalesRepository.findByDateBetween(start, end);
+        List<BeerSaleEdit> salesList = beerSalesRepository.findByDateBetween(start, end);
         Map<LocalDate, Integer> totalSalesMap = new HashMap<>();
-        for (BeerSales sale : salesList) {
+        for (BeerSaleEdit sale : salesList) {
             LocalDate date = sale.getDate();
             int quantity = sale.getQuantity();
             Beer beer = beerMap.get(sale.getBeerId());

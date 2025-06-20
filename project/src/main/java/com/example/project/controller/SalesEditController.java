@@ -47,10 +47,12 @@ public class SalesEditController {
         }
 
         // 重複削除
-        Map<Integer, BeerSaleEdit> uniqueMap = new LinkedHashMap<>();
+        Map<Long, BeerSaleEdit> uniqueMap = new LinkedHashMap<>();
+
         for (BeerSaleEdit sale : salesList) {
             uniqueMap.putIfAbsent(sale.getBeerId(), sale);
         }
+
         List<BeerSaleEdit> uniqueSalesList = new ArrayList<>(uniqueMap.values());
 
         uniqueSalesList.sort(Comparator.comparing(BeerSaleEdit::getBeerId));

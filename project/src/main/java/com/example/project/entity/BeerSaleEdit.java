@@ -11,55 +11,69 @@ public class BeerSaleEdit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
     private LocalDate date;
-    private Integer quantity;
-    private Integer beerId;
 
+    @Column(name = "beer_id")
+    private Long beerId;
 
-  private transient BeerItemEdit beer;  // ← DBに影響しない表示用データ
+    private int quantity;
 
+    @Column(name = "user_id")
+    private Long userId;
 
+    // 表示用データ（DBには保存されない）
+    @Transient
+    private BeerItemEdit beer;
 
+    // ===== Getter & Setter =====
 
-      public void setId(Integer id) {
-        this.id = id;
-    }
-
- public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-
-public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
-}
-
-public void setBeerId(Integer id) {
-    this.beerId = id;
-}
- public void setBeer(BeerItemEdit beer) {
-        this.beer = beer;
-    }
-
-
-
-
-public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-public Integer getQuantity() {
-    return this.quantity;
-}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-public Integer getBeerId() {
-    return beerId;
-}
+    public LocalDate getDate() {
+        return date;
+    }
 
- public BeerItemEdit getBeer() {
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Long getBeerId() {
+        return beerId;
+    }
+
+    public void setBeerId(Long beerId) {
+        this.beerId = beerId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public BeerItemEdit getBeer() {
         return beer;
     }
 
-
+    public void setBeer(BeerItemEdit beer) {
+        this.beer = beer;
+    }
 }
