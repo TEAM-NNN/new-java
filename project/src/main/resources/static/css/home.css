@@ -46,17 +46,22 @@ h1 {
 }
 
 .logout {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .logout form button {
     padding: 6px 12px;
     font-size: 12px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #e5e7e9, #cacfd2);
+    color: #333;
     cursor: pointer;
     border: none;
-    border-radius: 4px;
-    background-color: #ccc;
-    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+.logout form button:hover {
+    background: linear-gradient(to bottom, #f0f3f4, #b2babb);
+    transform: translateY(-1px);
 }
