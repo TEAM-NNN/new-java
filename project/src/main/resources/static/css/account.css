@@ -61,3 +61,20 @@ th {
 tr:hover {
     background-color: #f1f1f1;
 }
+
+
+.return-home form button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #e5e7e9, #cacfd2);
+    color: #333;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.return-home form button:hover {
+    background: linear-gradient(to bottom, #f0f3f4, #b2babb);
+    transform: translateY(-1px);
+}
