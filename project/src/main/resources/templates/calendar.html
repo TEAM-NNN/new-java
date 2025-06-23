@@ -41,8 +41,8 @@
              
              <!-- 有効日付セル -->
               <div th:if="${i >= startDayOfWeek && i - startDayOfWeek < days.size()}"
-                th:with="day=${days[i - startDayOfWeek]}"
-                class="day-cell">
+                th:with="day=${days[i - startDayOfWeek]}, date=${day.date}"
+                th:class="${date.equals(today)} ? 'day-cell today' : 'day-cell'">
 
                 <div class="day-number" th:text="${day.date.dayOfMonth}"></div>
                 <div class="weather" th:text="${day.weather}"></div>
@@ -59,10 +59,6 @@
     </tbody>
     </table>
 </div>
-    <div class="return-home">
-        <form th:action="@{ / }" method="get">
-            <button type="submit">ホーム</button>
-        </form>
-    </div>
+
 </body>
 </html>
