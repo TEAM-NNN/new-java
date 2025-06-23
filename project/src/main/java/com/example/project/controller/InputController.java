@@ -4,37 +4,47 @@ import com.example.project.dto.BeerItem;
 import com.example.project.dto.BeerForm;
 import com.example.project.entity.BeerSaleEdit;
 import com.example.project.repository.BeerSaleRepository;
+import com.example.project.repository.BeerRepository;
+import com.example.project.entity.Beer;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 public class InputController {
 
     @Autowired
     private BeerSaleRepository beerSaleRepository;
+    @Autowired
+    private BeerRepository beerRepository;
 
     @GetMapping("/input")
-    public String showInputForm(Model model) {
+    public String showInputForm(@AuthenticationPrincipal UserDetails user,Model model) {
 
           LocalDate today = LocalDate.now();
 
              boolean alreadySaved = beerSaleRepository.existsByDate(today);
   
-        List<BeerItem> beerList = Arrays.asList(
-                new BeerItem(1, "ホワイトビール", 900, "4901234567894"),
-                new BeerItem(2, "ラガー", 800, "4512345678907"),
-                new BeerItem(3, "ペールエール", 1000, "4987654321097"),
-                new BeerItem(4, "フルーツビール", 1000, "4545678901234"),
-                new BeerItem(5, "黒ビール", 1200, "4999999999996"),
-                new BeerItem(6, "IPA", 900, "4571234567892")
-        );
+      List<Beer> beerEntityList = beerRepository.findAll();
+
+   // ② Beer → BeerItem に変換
+    List<BeerItem> beerList = beerEntityList.stream()
+        .map(beer -> new BeerItem(
+            beer.getId().intValue(),     // BeerItemはint、BeerはLong
+            beer.getName(),
+            beer.getPrice(),
+            beer.getJanCode()
+        ))
+        .collect(Collectors.toList());
 
         BeerForm beerForm = new BeerForm();
         beerForm.setBeerList(beerList);
@@ -42,6 +52,7 @@ public class InputController {
     model.addAttribute("form", beerForm);
     model.addAttribute("today", today);
     model.addAttribute("alreadySaved", alreadySaved);
+    model.addAttribute("username", user.getUsername()); // 初期化
 
     // ★入力済み時だけメッセージを追加（returnしない！）
     if (alreadySaved) {
@@ -50,6 +61,14 @@ public class InputController {
 
     return "input-form";
    
+    }
+
+    @PostMapping("/input")
+    public String saveInput(@ModelAttribute BeerSaleEdit beerSaleEdit,
+                            @AuthenticationPrincipal UserDetails user) {
+        beerSaleEdit.setUsername(user.getUsername());
+        // 保存処理
+        return "redirect:/input";
     }
 
     @PostMapping("/input/save")
