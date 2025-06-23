@@ -8,6 +8,7 @@ import com.example.project.repository.BeerSaleRepositoryEdit;
 import com.example.project.repository.BeerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +27,11 @@ public class SalesEditController {
 
     // --- 表示 ---
     @GetMapping("/edit")
-    public String showInputForm(Model model) {
-        LocalDate today = LocalDate.now();
-        List<BeerSaleEdit> salesList = beerSaleRepository.findByDate(today);
+    public String showInputForm(@RequestParam(value = "targetDate", required = false) LocalDate targetDate, Model model) {
+        LocalDate date = (targetDate != null) ? targetDate : LocalDate.now();
+        List<BeerSaleEdit> salesList = beerSaleRepository.findByDate(date);
+        
+       
 
         List<Beer> beerEntityList = beerRepository.findAll();
         List<BeerItemEdit> beerList = beerEntityList.stream()
@@ -67,7 +70,8 @@ public class SalesEditController {
 
         model.addAttribute("form", form);
         model.addAttribute("salesList", uniqueSalesList);
-        model.addAttribute("today", today);
+        model.addAttribute("today", date);
+        model.addAttribute("targetDate", date);
         return "edit-form";
     }
 
@@ -77,15 +81,16 @@ public class SalesEditController {
        
             @RequestParam("beerId") Integer beerId,
             @RequestParam("quantity") Integer quantity,
+            @RequestParam("targetDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate targetDate,
             Model model) {
 
-                LocalDate today = LocalDate.now();
+                //LocalDate today = LocalDate.now();
 
 
 System.out.println("更新対象ID: " + beerId);
   System.out.println("更新数量: " + quantity);
 
-        Optional<BeerSaleEdit> optional = beerSaleRepository.findByBeerIdAndDate(beerId, today);
+        Optional<BeerSaleEdit> optional = beerSaleRepository.findByBeerIdAndDate(beerId, targetDate);
         if (optional.isPresent()) {
             BeerSaleEdit sale = optional.get();
             sale.setQuantity(quantity);
@@ -95,7 +100,7 @@ System.out.println("更新対象ID: " + beerId);
             model.addAttribute("message", "修正できませんでした。");
         }
 
-        return showInputForm(model); // 再表示
+        return showInputForm(targetDate, model); // 再表示
     }
 } 
 

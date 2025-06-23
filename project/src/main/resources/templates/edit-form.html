@@ -7,7 +7,13 @@
 </head>
 <body>
     <h2>実績修正画面</h2>
-    <p>当日日付：<span th:text="${today}"></span></p>
+    <p>日付：<span th:text="${today}"></span></p>
+    <form method="get" action="/edit">
+    <input type="date" name="targetDate" value="${targetDate}" />
+    <button type="submit">表示</button>
+    </form>
+    <!-- 実績修正フォームにも targetDate を hidden で渡す -->
+    <input type="hidden" name="targetDate" value="${targetDate}" />
 
     <table>
         <tr>
@@ -18,22 +24,23 @@
             <th>販売本数</th>
             <th></th>
         </tr>
+        <tbody>
         <tr th:each="sale : ${salesList}">
-            <form th:action="@{/edit/update}" method="post">
-                <input type="hidden" name="beerId" th:value="${sale.beerId}" />
-             <!-- ビール情報は sale.beer 経由で表示 -->
-                <td th:text="${sale.beer.no}"></td>
-                <td th:text="${sale.beer.name}"></td>
-                <td th:text="${sale.beer.price}"></td>
-                <td th:text="${sale.beer.janCode}"></td>
-                <td>
-                    <input type="number" name="quantity" min="0" th:value="${sale.quantity}" />
-                </td>
-                <td>
+            <td th:text="${sale.beer.no}"></td>
+            <td th:text="${sale.beer.name}"></td>
+            <td th:text="${sale.beer.price}"></td>
+            <td th:text="${sale.beer.janCode}"></td>
+            <td>
+                <form th:action="@{/edit/update}" method="post" style="display:inline;">
+                    <input type="hidden" name="targetDate" th:value="${targetDate}" />
+                    <input type="hidden" name="beerId" th:value="${sale.beerId}" />
+                    <input type="number" name="quantity" min="0" th:value="${sale.quantity}" style="width:60px;" />
                     <button type="submit">変更</button>
-                </td>
-            </form>
+                </form>
+            </td>
+            <td></td>
         </tr>
+        </tbody>
     </table>
 
     <div class="return-home">
