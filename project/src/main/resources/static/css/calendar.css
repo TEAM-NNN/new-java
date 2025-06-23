@@ -1,129 +1,147 @@
+    body {
+        font-family: "メイリオ", sans-serif;
+        padding: 40px;
+        background-color: #fffdf5; 
+        color: #333;
+        margin: 0;
+    }
 
-        body {
-            font-family: "メイリオ", sans-serif;
-            padding: 30px;
-            background-color: #ffffff;
-        }
+    .calendar-container {
+        max-width: 1000px;
+        margin: auto;
+    }
 
-        .calendar-container {
-            max-width: 1000px;
-            margin: auto;
-        }
+    .month-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #4a3f29;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .month-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #d38658;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    /* ナビゲーションボタン */
+    .nav-buttons {
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
 
-        .nav-buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .nav-buttons a {
+        padding: 10px 20px;
+        background: linear-gradient(to bottom, #a9d0f5, #58ace0);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
-        .nav-buttons a {
-            margin: 0 10px;
-            text-decoration: none;
-            padding: 8px 16px;
-            background-color: #f5b777;
-            color: #fff;
-            border-radius: 8px;
-        }
+    .nav-buttons a:hover {
+        background: linear-gradient(to bottom, #d6ecfa, #3498db);
+        transform: translateY(-2px);
+    }
 
-        table.calendar {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-        }
+    /* カレンダーテーブル */
+    table.calendar {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
-        .calendar th, .calendar td {
-            border: 1px solid #ddd;
-            width: 14.28%;
-            height: 100px;
-            vertical-align: top;
-            padding: 5px;
-            font-size: 14px;
-        }
+    .calendar th, .calendar td {
+        border: 1px solid #eee;
+        width: 14.28%;
+        height: 100px;
+        vertical-align: top;
+        padding: 8px;
+        font-size: 14px;
+    }
 
-        .calendar th {
-            background-color: #f2f2f2;
-            text-align: center;
-        }
+    .calendar th {
+        background-color: #fdf6e3;
+        text-align: center;
+        color: #4a3f29;
+        font-weight: bold;
+    }
 
-        .day-cell {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    /* 各日セル */
+    .day-cell {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
 
-        .day-number {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
+    .day-number {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
 
-        .weather {
-            font-size: 20px;
-        }
+    .weather {
+        font-size: 20px;
+    }
 
-        .sales {
-            font-size: 13px;
-            color: #555;
-        }
+    .sales {
+        font-size: 13px;
+        color: #555;
+    }
 
-        .detail-button {
-            margin-top: auto;
-            text-align: right;
-        }
+    .detail-button {
+        margin-top: auto;
+        text-align: right;
+    }
 
-        .detail-button a {
-            font-size: 12px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #c0644c;
-            padding: 2px 6px;
-            border-radius: 5px;
-        }
-        .today{
-            background-color: #fff8e1;
-            border: 2px solid #f5b777;
-        }
-        .sunday{
-            color: red;
-        }
-        .saturday{
-            color: blue;
-        }
-        .today {
-            background-color: #fff3cd;
-            border: 2px solid #ff9800;
-            box-shadow: inset 0 0 5px #ffa726;
-        }   
+    .detail-button a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #c0644c;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background-color 0.2s ease-in-out;
+    }
 
-        .beer-back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 12px 24px;
-            background: linear-gradient(to bottom, #fce38a, #f38181);
-            color: #5a3e1b;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 999px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            font-family: "メイリオ", sans-serif;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            z-index: 1000;
+    .detail-button a:hover {
+        background-color: #a64b33;
+    }
 
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
+    /* 特別な日付 */
+    .today {
+        background-color: #fff3cd;
+        border: 2px solid #ff9800;
+        box-shadow: inset 0 0 5px #ffa726;
+        border-radius: 8px;
+    }
+    .sunday {
+        color: #e74c3c !important;
+        font-weight: bold;
+    }
+    .saturday {
+        color: #3498db !important;
+        font-weight: bold;
+    }
 
-            .beer-back-button:hover {
-                background: linear-gradient(to bottom, #fcd56a, #f06969);
-                transform: scale(1.05);
-                box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
-        }
+    /* ホームに戻るボタン */
+    .beer-back-button {
+        padding: 10px 20px;
+        background: linear-gradient(to bottom, #a9d0f5, #58ace0);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        
+    }
+
+    .beer-back-button:hover {
+        background: linear-gradient(to bottom, #d6ecfa, #3498db);
+        transform: translateY(-2px);
+    }

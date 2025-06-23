@@ -1,82 +1,126 @@
-/* 全体 */
+/* ===== 全体基本設定 ===== */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f0f8ff; /* アリスブルー背景 */
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #fffdf5;
+    color: #333;
 }
 
-/* タイトル */
-h2 {
-    color: #0077b6;
+h1, h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #4a3f29;
 }
 
-/* 表全体 */
+p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* ===== ボタン共通 ===== */
+.btn {
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(to bottom, #a9d0f5, #58ace0);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background: linear-gradient(to bottom, #d6ecfa, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 管理ボタン */
+.btn-manage {
+    background: linear-gradient(to bottom, #b2f2bb, #2ecc71);
+    color: #2e472f;
+}
+
+.btn-manage:hover {
+    background: linear-gradient(to bottom, #d5fada, #27ae60);
+}
+
+.header-actions {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ===== テーブル共通 ===== */
 table {
     width: 100%;
+    max-width: 960px;
     border-collapse: collapse;
-    margin-top: 10px;
-    background-color: #ffffff;
-    border: 1px solid #90e0ef;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.1);
-}
-
-/* ヘッダー行 */
-th {
-    background-color: #00b4d8;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-
-/* データ行 */
-td {
-    padding: 10px;
-    border: 1px solid #caf0f8;
-    text-align: center;
-}
-
-/* 入力フィールド */
-input[type="number"] {
-    width: 60px;
-    padding: 4px;
-    border: 1px solid #90e0ef;
-    border-radius: 4px;
-}
-
-/* 保存ボタン */
-button[type="submit"] {
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0077b6;
-    color: white;
-    border: none;
+}
+
+th, td {
+    padding: 16px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #fdf6e3;
+    font-weight: bold;
+    color: #4a3f29;
+}
+
+tr:hover {
+    background-color: #fef9ea;
+}
+
+/* ===== 入力欄 ===== */
+input[type="number"] {
+    width: 80px;
+    padding: 8px;
     border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
+    border: 1px solid #ccc;
+    text-align: right;
 }
 
-button[type="submit"]:hover {
-    background-color: #0096c7;
+/* ===== ホーム戻るボタン区域 ===== */
+.return-home {
+    text-align: center;
+    margin-top: 40px;
 }
 
-/* 入力済メッセージ */
-.message {
-    color: gray;
-    margin-top: 10px;
-}
-
-.return-home form button {
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 20px;
+.return-home button, .return-home a {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 30px;
     background: linear-gradient(to bottom, #e5e7e9, #cacfd2);
     color: #333;
     cursor: pointer;
     border: none;
     transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.return-home form button:hover {
+.return-home button:hover, .return-home a:hover {
     background: linear-gradient(to bottom, #f0f3f4, #b2babb);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
