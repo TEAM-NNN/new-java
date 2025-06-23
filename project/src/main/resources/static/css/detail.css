@@ -1,67 +1,74 @@
+    /* ===== 全体基本設定 ===== */
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        min-height: 100vh;
+        margin: 0;
+        padding: 40px;
+        font-family: "Helvetica Neue", sans-serif;
+        background-color: #fffdf5;
+        color: #333;
+    }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f0f8ff; /* アリスブルー背景 */
-    padding: 20px;
-}
+    h1, h2 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: #4a3f29;
+    }
 
-/* タイトル */
-h2 {
-    color: #0077b6;
-}
+    p {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #555;
+    }
 
-/* 表全体 */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background-color: #ffffff;
-    border: 1px solid #90e0ef;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.1);
-}
+    /* ===== テーブル共通 ===== */
+    table {
+        width: 100%;
+        max-width: 960px;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
 
-/* ヘッダー行 */
-th {
-    background-color: #00b4d8;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
+    th, td {
+        padding: 16px 20px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
 
-/* データ行 */
-td {
-    padding: 10px;
-    border: 1px solid #caf0f8;
-    text-align: center;
-}
+    th {
+        background-color: #fdf6e3;
+        font-weight: bold;
+        color: #4a3f29;
+    }
 
-/* 入力フィールド */
-input[type="number"] {
-    width: 60px;
-    padding: 4px;
-    border: 1px solid #90e0ef;
-    border-radius: 4px;
-}
+    tr:hover {
+        background-color: #fef9ea;
+    }
 
-/* 保存ボタン */
-button[type="submit"] {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0077b6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    .calendar-back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 8px 18px;
+        font-size: 14px;
+        border-radius: 30px;
+        background: linear-gradient(to bottom, #e5e7e9, #cacfd2);
+        color: #333;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease-in-out;
+    }
 
-button[type="submit"]:hover {
-    background-color: #0096c7;
-}
-
-/* 入力済メッセージ */
-.message {
-    color: gray;
-    margin-top: 10px;
-}
-
+    .calendar-back-button:hover {
+        background: linear-gradient(to bottom, #f0f3f4, #b2babb);
+        transform: translateY(-2px);
+    }
