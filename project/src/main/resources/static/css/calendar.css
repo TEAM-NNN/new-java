@@ -95,7 +95,12 @@
         .saturday{
             color: blue;
         }
-        
+        .today {
+            background-color: #fff3cd;
+            border: 2px solid #ff9800;
+            box-shadow: inset 0 0 5px #ffa726;
+        }   
+
         .beer-back-button {
             position: fixed;
             top: 20px;
