@@ -7,10 +7,10 @@ public class BeerSalesDetailDTO {
     private String beerName;     // ビール名
     private int quantity;        // 販売本数
     private int totalSales;      // 売上金額
-    private String janCode;      // JANコード
+    private Long janCode;      // JANコード
 
     // 全項目を受け取るコンストラクタ
-    public BeerSalesDetailDTO(String beerName, int quantity, int totalSales, String janCode) {
+    public BeerSalesDetailDTO(String beerName, int quantity, int totalSales, Long janCode) {
         this.beerName = beerName;
         this.quantity = quantity;
         this.totalSales = totalSales;
@@ -30,7 +30,7 @@ public class BeerSalesDetailDTO {
         return totalSales;
     }
 
-    public String getJanCode() {
+    public Long getJanCode() {
         return janCode;
     }
 }

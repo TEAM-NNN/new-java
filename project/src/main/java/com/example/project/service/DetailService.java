@@ -35,16 +35,6 @@ public class DetailService {
                         (a, b) -> a  // 重複キーがあれば最初のを優先
                 ));
 
-        // ビール名 → JANコード
-        Map<String, String> janMap = Map.of(
-                "ホワイトビール", "4901234567894",
-                "ラガー", "4512345678907",
-                "ペールエール", "4987654321097",
-                "フルーツビール", "4545678901234",
-                "黒ビール", "4999999999996",
-                "IPA", "4571234567892"
-        );
-
         List<BeerSalesDetailDTO> details = new ArrayList<>();
 
         for (BeerSaleEdit sale : salesList) {
@@ -54,9 +44,9 @@ public class DetailService {
                 int quantity = sale.getQuantity();
                 int price = beer.getPrice() != null ? beer.getPrice() : 0;
                 int total = quantity * price;
-                String jan = janMap.getOrDefault(name, "不明");
+                Long janCode = beer.getJanCode();
 
-                details.add(new BeerSalesDetailDTO(name, quantity, total, jan));
+                details.add(new BeerSalesDetailDTO(name, quantity, total, janCode));
             }
         }
 
