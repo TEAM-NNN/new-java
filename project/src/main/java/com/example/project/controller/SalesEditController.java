@@ -1,7 +1,6 @@
 package com.example.project.controller;
 
 import com.example.project.dto.BeerFormEdit;
-//import com.example.project.dto.BeerItem;
 import com.example.project.dto.BeerItemEdit;
 import com.example.project.entity.Beer;
 import com.example.project.entity.BeerSaleEdit;
@@ -40,16 +39,7 @@ public class SalesEditController {
             beer.getJanCode()
         ))
         .collect(Collectors.toList());
-        /*  ビールマスタの一覧
-        List<BeerItemEdit> beerList = Arrays.asList(
-            new BeerItemEdit(1, "ホワイトビール", 900, "4901234567894"),
-            new BeerItemEdit(2, "ラガー", 800, "4512345678907"),
-            new BeerItemEdit(3, "ペールエール", 1000, "4987654321097"),
-            new BeerItemEdit(4, "フルーツビール", 1000, "4545678901234"),
-            new BeerItemEdit(5, "黒ビール", 1200, "4999999999996"),
-            new BeerItemEdit(6, "IPA", 900, "4571234567892")
-        ); */
-
+    
         // 実績データに BeerItem を対応付け
         for (BeerSaleEdit sale : salesList) {
             for (BeerItemEdit item : beerList) {
