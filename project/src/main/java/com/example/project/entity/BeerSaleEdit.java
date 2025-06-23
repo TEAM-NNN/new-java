@@ -27,6 +27,8 @@ public class BeerSaleEdit {
     @Transient
     private BeerItemEdit beer;
 
+     private String username;
+
     // ===== Getter & Setter =====
 
     public Long getId() {
@@ -44,6 +46,14 @@ public class BeerSaleEdit {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+      public String getUsername() {
+        return username;
+      }
 
     public Long getBeerId() {
         return beerId;
