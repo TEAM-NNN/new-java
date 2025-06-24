@@ -12,22 +12,22 @@ public class BeerSaleEdit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDate date;
+    private String email;
 
     @Column(name = "beer_id")
     private Long beerId;
 
     private int quantity;
 
-    @Column(name = "user_id")
+    @Column(name = "enter_user_id")
     private Long userId;
 
     // 表示用データ（DBには保存されない）
     @Transient
     private BeerItemEdit beer;
 
-     private String username;
+    // private String username;
 
     // ===== Getter & Setter =====
 
@@ -47,13 +47,17 @@ public class BeerSaleEdit {
         this.date = date;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // public void setUsername(String username) {
+    //     this.username = username;
+    // }
 
-      public String getUsername() {
-        return username;
-      }
+    //   public String getUsername() {
+    //     return username;
+    //   }
+
+    public String getEmail(){
+        return email;
+    }
 
     public Long getBeerId() {
         return beerId;
