@@ -4,8 +4,11 @@ import com.example.project.dto.BeerItem;
 import com.example.project.dto.BeerForm;
 import com.example.project.entity.BeerSaleEdit;
 import com.example.project.repository.BeerSaleRepository;
+import com.example.project.repository.UserRepository;
 import com.example.project.repository.BeerRepository;
 import com.example.project.entity.Beer;
+import com.example.project.model.User;
+
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -63,16 +66,13 @@ public class InputController {
    
     }
 
-    @PostMapping("/input")
-    public String saveInput(@ModelAttribute BeerSaleEdit beerSaleEdit,
-                            @AuthenticationPrincipal UserDetails user) {
-        beerSaleEdit.setUsername(user.getUsername());
-        // 保存処理
-        return "redirect:/input";
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/input/save")
-    public String saveResult(@ModelAttribute("form") BeerForm form, Model model) {
+    public String saveResult(@ModelAttribute("form") BeerForm form,
+                         @AuthenticationPrincipal UserDetails userDetails,
+                         Model model){
         LocalDate today = LocalDate.now();
 
         if (beerSaleRepository.existsByDate(today)) {
@@ -83,14 +83,20 @@ public class InputController {
         return "input-form"; // 保存済みでも同じ画面に戻す
     }
 
+    // ログイン中のユーザーのメールアドレスからUserエンティティを取得
+        String email = userDetails.getUsername();
+        User loginUser = userRepository.findByEmailAndDeleteFalse(email)
+        .orElseThrow(() -> new RuntimeException("ユーザーが見つかりません: " + email));
+
+
         for (BeerItem item : form.getBeerList()) {
-System.out.println("Saving beer_id = " + item.getNo()); // ← 追加！
+        System.out.println("Saving beer_id = " + item.getNo()); 
 
             BeerSaleEdit sale = new BeerSaleEdit();
             sale.setDate(today);
             sale.setBeerId((long) item.getNo());
             sale.setQuantity(item.getSoldCount());
-            sale.setUserId(1L);                    // 仮にユーザーIDを固定
+            sale.setUserId(loginUser.getId());       
 
             beerSaleRepository.save(sale);
         }

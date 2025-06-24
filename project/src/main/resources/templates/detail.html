@@ -13,6 +13,8 @@
 
     <h2>実績詳細画面</h2>
     <p th:text="${date} + '     売上詳細'">販売詳細</p>
+    <p th:if="${details.size() > 0}" 
+         th:text="'登録者：' + ${details[0].email}">登録者：email@example.com</p>
 
     <table>
         <thead>
